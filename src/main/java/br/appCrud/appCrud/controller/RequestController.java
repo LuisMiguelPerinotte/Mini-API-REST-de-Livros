@@ -10,35 +10,35 @@ public class RequestController {
     private Integer counter = 0;
     private HashMap<Integer, Book> books = new HashMap<>();
 
-    @GetMapping("/getbooks")
-    public HashMap<Integer, Book> getBooks() {
+    @GetMapping("/books")
+    public HashMap<Integer, Book> getAllBooks() {
         return books;
     }
 
-    @GetMapping("/getbook")
-    public Book getBook(@RequestParam(value = "id") Integer id) {
+    @GetMapping("/books/{id}")
+    public Book getBookById(@PathVariable("id") Integer id) {
         return books.get(id);
     }
 
-    @PostMapping("/setbook")
+    @PostMapping("/books")
     public String setBook(@RequestBody Book book) {
         book.setId(counter++);
         books.put(book.getId(), book);
-        return "Cadastrado! Livro: " + book.getName();
+        return "Livro Cadastrado!";
     }
 
-    @DeleteMapping("/delbook")
-    public String delBook(@RequestParam (value = "id") Integer id) {
+    @DeleteMapping("/books/{id}")
+    public String deleteBookById(@PathVariable("id") Integer id) {
         Book removeBook =  books.remove(id);
         if (removeBook != null) {
             return "Livro Deletado!";
         }
 
-        return "Livro não existe!";
+        return "O Livro não existe!";
     }
 
-    @PutMapping("/updbook")
-    public String updBook(@RequestParam (value = "id") Integer id, @RequestBody Book newBook) {
+    @PutMapping("/books/{id}")
+    public String updateBookById(@PathVariable("id") Integer id, @RequestBody Book newBook) {
         Book book = books.get(id);
         if (book == null) {
             return "Livro não encontrado!";

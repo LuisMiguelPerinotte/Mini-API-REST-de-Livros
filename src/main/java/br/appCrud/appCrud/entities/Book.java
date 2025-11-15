@@ -1,8 +1,5 @@
 package br.appCrud.appCrud.entities;
 
-import javax.annotation.processing.Generated;
-
-
 public class Book {
     private Integer id;
     private String name;
