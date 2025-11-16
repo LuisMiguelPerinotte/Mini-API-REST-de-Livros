@@ -6,28 +6,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
+@RequestMapping("/books")
 public class RequestController {
     private Integer counter = 0;
     private HashMap<Integer, Book> books = new HashMap<>();
 
-    @GetMapping("/books")
+    @GetMapping
     public HashMap<Integer, Book> getAllBooks() {
         return books;
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("{id}")
     public Book getBookById(@PathVariable("id") Integer id) {
         return books.get(id);
     }
 
-    @PostMapping("/books")
+    @PostMapping
     public String setBook(@RequestBody Book book) {
         book.setId(counter++);
         books.put(book.getId(), book);
         return "Livro Cadastrado!";
     }
 
-    @DeleteMapping("/books/{id}")
+    @DeleteMapping("{id}")
     public String deleteBookById(@PathVariable("id") Integer id) {
         Book removeBook =  books.remove(id);
         if (removeBook != null) {
@@ -37,7 +38,7 @@ public class RequestController {
         return "O Livro não existe!";
     }
 
-    @PutMapping("/books/{id}")
+    @PutMapping("{id}")
     public String updateBookById(@PathVariable("id") Integer id, @RequestBody Book newBook) {
         Book book = books.get(id);
         if (book == null) {
