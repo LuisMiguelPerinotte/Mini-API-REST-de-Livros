@@ -5,15 +5,6 @@ public class Book {
     private String name;
     private String author;
 
-    // Builders
-    public Book(){
-    }
-
-    public Book(String name, String author) {
-        this.name = name;
-        this.author = author;
-    }
-
     // getters and setters
     public String getName() {
         return name;
