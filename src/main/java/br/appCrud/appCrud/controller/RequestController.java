@@ -36,18 +36,18 @@ public class RequestController {
         List<String> names = new ArrayList<>();
         List<Integer> idBooks = ids.getIds();
 
-        for (Integer idBook : idBooks) {
-            try {
-                names.add(books.get(idBook).getName());
-                books.remove(idBook);
+        for (int i = 0; i < idBooks.size(); i++) {
+            Book book = books.get(idBooks.get(i));
+            if (book == null) {
+                names.add("NÃO ENCONTRADO");
 
-            } catch (NullPointerException e) {
-                names.add("LIVRO NÃO ENCONTRADO");
+            } else {
+                names.add("DELETADO");
+                books.remove(idBooks.get(i));
             }
         }
         return names;
     }
-
 
     @DeleteMapping("{id}")
     public String deleteBookById (@PathVariable("id") Integer id) {
